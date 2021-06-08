@@ -1,0 +1,16 @@
+<div class="rectangle">
+  <div class="center">
+    <p class="readerId">Måler navn: {{betterReader.readerName}}</p><br />
+    <p class="readerId">Måler nummer: {{betterReader.readerNumber}}</p><br />
+    <p class="readerId">Sidste aflæsning: {{betterReader.reading}} {{betterReader.readerUnit}}</p><br />
+    <p class="readerId">Dato for sidste aflæsning: {{betterReader.date}}</p><br />
+    <p class="readerId">Placering: {{betterReader.placement}}</p><br />
+    <br />
+    <form (submit)="sendData(reader.value)">
+      <input required='' type='text' #reader>
+      <label alt='Indtast den nye aflæsning' placeholder='Mål'></label>
+    </form>
+    <a (click)="sendData(reader.value)" class="btn btn-white btn-animation-1">Send</a>
+  </div>
+  <a (click)="redirectBack()" class="btn btn-white btn-animation-1">Gå Tilbage</a>
+</div>

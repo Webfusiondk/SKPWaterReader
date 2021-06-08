@@ -1,0 +1,17 @@
+<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="token">
+  <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a class="nav-item nav-link" routerLink="/location" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Tag aflæsning</a>
+      <a class="nav-item nav-link" routerLink="/statistic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Statistik</a>
+      <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active" *ngIf="token.Rolle>1">Users</a>
+      <a class="nav-item nav-link" routerLink="/historyData" routerLinkActive="active">Histoy Data</a>
+      <a class="nav-item nav-link" routerLink="/Vordingborg" routerLinkActive="active" *ngIf="token.Region == 'Vordingborg' || token.Rolle>1">Vordingborg</a>
+      <a class="nav-item nav-link" (click)="logout()">Logout</a>
+  </div>
+</nav>
+<!-- main app container -->
+<div class="app-container" [ngClass]="{ 'bg-light': token }">
+  <alert></alert>
+  <router-outlet></router-outlet>
+</div>

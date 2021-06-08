@@ -1,0 +1,6 @@
+<div *ngFor="let a of readers">
+  <app-water-reader [reader]="a">
+
+  </app-water-reader>
+</div>
+<a (click)="redirectBack()" class="btn btn-white btn-animation-1">Gå Tilbage</a>

@@ -1,0 +1,8 @@
+<label for="readers">Vælg en måler:</label>
+<select #mySelect (change)="onSelectChange(mySelect.value)">
+  <option *ngFor="let reader of readers" value="{{reader.readerNumber}}">{{reader.readerName}}</option>
+</select>
+
+<app-clicked-stats [reader]="selectedReader">
+
+</app-clicked-stats>

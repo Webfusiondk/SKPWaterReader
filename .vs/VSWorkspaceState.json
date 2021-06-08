@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\clicked-reader",
+    "\\src\\app\\location",
+    "\\src\\app\\location-controller",
+    "\\src\\app\\reader-controller",
+    "\\src\\app\\services",
+    "\\src\\app\\water-reader",
+    "\\src\\assets"
+  ],
+  "SelectedNode": "\\src\\app\\reader-controller\\reader-controller.component.ts",
+  "PreviewInSolutionExplorer": false
+}
