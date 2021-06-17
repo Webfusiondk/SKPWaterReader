@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service'
 import { Reader } from '../Reader';
 import { Router } from '@angular/router';
+import { LocationObj } from '../Location';
 
 @Component({
   selector: 'app-reader-controller',
@@ -14,10 +15,20 @@ export class ReaderControllerComponent implements OnInit {
   public readers;
   ngOnInit(): void {
     this.location = history.state;
+    if(this.location.locationName != undefined){
       this.readerApi.getReadersByLocation(this.location.locationName).subscribe(req => this.readers = req);
+    }
+    else{
+      this.readerApi.getReadersByLocation(this.location.Region).subscribe(req => this.readers = req);
+    }
   }
   redirectBack() {
-    this.router.navigateByUrl('/location');
+    if(this.location.locationName != undefined){
+      this.router.navigateByUrl('/location');
+    }
+    else{
+      this.router.navigateByUrl('');
+    }
   }
 }
 

@@ -20,9 +20,9 @@ const routes: Routes = [
   { path: 'account', loadChildren: accountModule },
   { path: 'readers', component: ReaderControllerComponent},
   { path: 'clicked', component: ClickedReaderComponent},
-  { path: 'statistic', component: StatisticControllerComponent },
+  { path: 'statistic', component: StatisticControllerComponent, canActivate: [AuthGuardComponent] },
   { path: 'clickedStats', component: ClickedStatsComponent },
-  { path: 'historyData', component: HistoryComponent},
+  { path: 'historyData', component: HistoryComponent, canActivate: [AuthGuardComponent]},
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

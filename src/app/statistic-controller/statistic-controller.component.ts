@@ -1,6 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
 import { BetterReader } from '../BetterReader';
 import { ApiService } from '../services/api.service';
+
+ 
 
 @Component({
   selector: 'app-statistic-controller',
@@ -9,6 +12,8 @@ import { ApiService } from '../services/api.service';
 })
 export class StatisticControllerComponent implements OnInit {
 
+ 
+
   constructor(private readerApi: ApiService) { }
   public readers: any;
   public selectedReader: any;
@@ -16,6 +21,8 @@ export class StatisticControllerComponent implements OnInit {
   ngOnInit(): void {
     this.loadDataFromApi();
   }
+
+ 
 
   onSelectChange(reader: any) {
     let t: BetterReader;
@@ -32,3 +39,8 @@ export class StatisticControllerComponent implements OnInit {
     this.readerApi.getLocation().subscribe(loc => this.locations = loc);
   }
 }
+ 
+
+
+
+

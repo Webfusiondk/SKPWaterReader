@@ -24,19 +24,17 @@ export class ListComponent implements OnInit {
             next: () => {
                 console.log("Nothing wrong");
                 temp = true;
+                const user = this.users.find(x => x.id === id);
+                user.isDeleting = true;
+                console.log(id);
+                this.apifetch.RemoveUserById(id)
+                .pipe(first())
+                .subscribe(() => this.users = this.users.filter(x => x.id !== id));
             },
             error: error => {
                 console.log("Dose not work");
                 temp = false;
             }
         });
-        if (temp)
-        {
-            const user = this.users.find(x => x.id === id);
-            user.isDeleting = true;
-            this.apifetch.RemoveUserById(id)
-                .pipe(first())
-                .subscribe(() => this.users = this.users.filter(x => x.id !== id));
-        }
     }
 }

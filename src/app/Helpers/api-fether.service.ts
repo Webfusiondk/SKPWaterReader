@@ -55,6 +55,7 @@ export class ApiFetcherService {
     }
 
     RemoveUserById(id : number){
+      console.log(id);
       return this.http.get<User[]>(`https://localhost:44397/api/user/remove` +id)
       .pipe(map(x => {
         // auto logout if the logged in user deleted their own record
