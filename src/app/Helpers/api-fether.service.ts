@@ -90,4 +90,9 @@ export class ApiFetcherService {
       })
     )
   }
+  
+  CreateReader(obj : any){
+    console.log(obj);
+    return this.http.post('https://localhost:44397/api/user/createuser',obj);
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { ApiFetcherService } from '../Helpers/api-fether.service';
 
@@ -8,12 +9,18 @@ import { AccountService } from '../services/account.service';
 export class ListComponent implements OnInit {
     users = null;
 
-    constructor(private apifetch : ApiFetcherService) {}
+    constructor(private apifetch : ApiFetcherService, private router : Router) {}
 
     ngOnInit() {
-        this.apifetch.GetAllUsers()
-            .pipe(first())
-            .subscribe(users => this.users = users);
+        if (this.apifetch.GetToken.Rolle>1)
+        {
+            this.apifetch.GetAllUsers()
+                .pipe(first())
+                .subscribe(users => this.users = users);
+        }
+        else{
+            this.router.navigateByUrl('');
+        }
     }
 
     deleteUser(id: number) {

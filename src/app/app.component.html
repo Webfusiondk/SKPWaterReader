@@ -4,9 +4,10 @@
       <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
       <a class="nav-item nav-link" routerLink="/location" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Tag aflæsning</a>
       <a class="nav-item nav-link" routerLink="/statistic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Statistik</a>
-      <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active" *ngIf="token.Rolle>1">Users</a>
+      <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active" *ngIf="token.Rolle>1">Bruger</a>
+      <a class="nav-item nav-link" routerLink="/admin" routerLinkActive="active" *ngIf="token.Rolle>1">Admin</a>
       <a class="nav-item nav-link" routerLink="/historyData" routerLinkActive="active">Histoy Data</a>
-      <a class="nav-item nav-link" (click)="logout()">Logout</a>
+      <a class="nav-item nav-link" (click)="logout()">Log ud</a>
   </div>
 </nav>
 <!-- main app container -->
