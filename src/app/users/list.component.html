@@ -1,11 +1,11 @@
-<h1>Users</h1>
-<a routerLink="add" class="btn btn-sm btn-success mb-2">Add User</a>
+<h1>Bruger</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Tilføj Bruger</a>
 <table class="table table-striped">
     <thead>
         <tr>
-            <th style="width: 25%">First Name</th>
-            <th style="width: 25%">Last Name</th>
-            <th style="width: 25%">Username</th>
+            <th style="width: 25%">Fornavn</th>
+            <th style="width: 25%">Efternavn</th>
+            <th style="width: 25%">Brugernavn</th>
             <th style="width: 25%">Region</th>
             <th style="width: 25%">Rolle</th>
             <th style="width: 10%"></th>
@@ -19,10 +19,10 @@
             <td>{{user.region}}</td>
             <td>{{user.rolle}}</td>
             <td style="white-space: nowrap">
-                <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1">Rediger</a>
                 <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
                     <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
-                    <span *ngIf="!user.isDeleting">Delete</span>
+                    <span *ngIf="!user.isDeleting">Slet</span>
                 </button>
             </td>
         </tr>

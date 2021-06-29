@@ -23,11 +23,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HistoryComponent } from './history-data/history.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AdministrateRouterComponent } from './administrate-router/administrate-router.component';
+import { AdminComponent } from '../app/admin/admin.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,7 @@ import { AdministrateRouterComponent } from './administrate-router/administrate-
     HomeComponent,
     AlertComponent,
     HistoryComponent,
-    AdministrateRouterComponent
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,9 @@ import { AdministrateRouterComponent } from './administrate-router/administrate-
     MatPaginatorModule,
     MatTableModule,
     MatFormFieldModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
