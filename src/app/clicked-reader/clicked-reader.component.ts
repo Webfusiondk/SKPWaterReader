@@ -31,7 +31,7 @@ export class ClickedReaderComponent implements OnInit {
       if (confirm("Er du sikker på du vil gemme aflæsningen: " + updateValue + " " + this.betterReader.readerUnit)) {
         this.readerDTO.reading = updateValue;
         this.readerDTO.readerNumber = this.betterReader.readerNumber;
-        this.apiService.updateReader(this.readerDTO).subscribe(() => this.redirectBack());
+        this.apiService.updateReaderReading(this.readerDTO).subscribe(() => this.redirectBack());
       }
     }
     else

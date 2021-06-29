@@ -27,7 +27,10 @@ export class ApiService {
   getReadersByLocation(locationName: string): Observable<Reader[]> {
     return this.http.get<Reader[]>(this.readerUrl + locationName);
   }
-  updateReader(readerDTO: ReaderUpdateDTO): Observable<any> {
+  deleteReader(reader: Reader) {
+    return this.http.delete(this.readerUrl + reader.readerNumber);
+  }
+  updateReaderReading(readerDTO: ReaderUpdateDTO): Observable<any> {
     return this.http.put(this.readerUrl, readerDTO, httpOptions);
   }
   createReader(reader: Reader): Observable<any> {
@@ -35,6 +38,9 @@ export class ApiService {
   }
   getLocation() {
     return this.http.get<Location[]>(this.locationUrl);
+  }
+  getAllReadersHistory(): Observable<any> {
+    return this.http.get<Reader[]>(this.readerHistoryUrl);
   }
   getReaderHistory(reader: Reader): Observable<any> {
     return this.http.get<Reader[]>(this.readerHistoryUrl + reader.readerNumber)

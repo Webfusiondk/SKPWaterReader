@@ -17,8 +17,6 @@ export class LocationControllerComponent implements OnInit {
 
   ngOnInit(): void {
     this.SetToken();
-    console.log(this.token.Region);
-    console.log()
     if(this.token.Rolle >1){
       this.locationApi.getLocation().subscribe(req => this.locations = req);
     }

@@ -27,6 +27,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdministrateRouterComponent } from './administrate-router/administrate-router.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FilterPipePipe,
     HomeComponent,
     AlertComponent,
-    HistoryComponent
+    HistoryComponent,
+    AdministrateRouterComponent
   ],
   imports: [
     BrowserModule,

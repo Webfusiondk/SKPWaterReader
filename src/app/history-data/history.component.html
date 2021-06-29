@@ -1,31 +1,41 @@
 <div>
-    <mat-form-field>
-      <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-    </mat-form-field>
-    
-    <table mat-table [dataSource]=dataSource class="mat-elevation-z8">
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> Position. </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-        </ng-container>
-        
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="weight">
-          <th mat-header-cell *matHeaderCellDef> Weight </th>
-          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-  
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          
-          <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-          </tr>
-        </ng-container>
-      </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-    </div>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. måler nr" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]=dataSource class="mat-elevation-z8">
+    <ng-container matColumnDef="readerNumber">
+      <th mat-header-cell *matHeaderCellDef> Måler nr. </th>
+      <td mat-cell *matCellDef="let reader"> {{reader.readerNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="readerName">
+      <th mat-header-cell *matHeaderCellDef> Måler navn </th>
+      <td mat-cell *matCellDef="let reader"> {{reader.readerName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="reading">
+      <th mat-header-cell *matHeaderCellDef> Måler aflæsning </th>
+      <td mat-cell *matCellDef="let reader"> {{reader.reading}} {{reader.readerUnit}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Dato </th>
+      <td mat-cell *matCellDef="let reader"> {{reader.date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef> Måler lokation </th>
+      <td mat-cell *matCellDef="let reader"> {{reader.location}} </td>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Ingen match på søgningen "{{input.value}}"</td>
+      </tr>
+    </ng-container>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
