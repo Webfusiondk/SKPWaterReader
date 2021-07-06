@@ -27,11 +27,17 @@ export class ApiService {
   getReadersByLocation(locationName: string): Observable<Reader[]> {
     return this.http.get<Reader[]>(this.readerUrl + locationName);
   }
+  getReaderByReaderNumber(readerNumber: string){
+    return this.http.get<Reader>(this.readerUrl + "readerNumber/" + readerNumber);
+  }
   deleteReader(reader: Reader) {
     return this.http.delete(this.readerUrl + reader.readerNumber);
   }
+  updateReader(reader: Reader) {
+    return this.http.put(this.readerUrl, reader, httpOptions);
+  }
   updateReaderReading(readerDTO: ReaderUpdateDTO): Observable<any> {
-    return this.http.put(this.readerUrl, readerDTO, httpOptions);
+    return this.http.put(this.readerUrl + "/reading", readerDTO, httpOptions);
   }
   createReader(reader: Reader): Observable<any> {
     return this.http.post(this.readerUrl, reader, httpOptions);

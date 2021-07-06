@@ -1,0 +1,11 @@
+<div class="rectangle">
+  <div class="center">
+    <p class="readerId">Måler navn: {{reader.readerName}}</p><br />
+    <p class="readerId">Måler nummer: {{reader.readerNumber}}</p><br />
+    <p class="readerId">Sidste aflæsning: {{reader.reading}} {{reader.readerUnit}}</p><br />
+    <p class="readerId">Dato for sidste aflæsning: {{reader.date}}</p><br />
+    <p class="readerId">Placering: {{reader.placement}}</p><br />
+    <br />
+  <a routerLink="/admin" (click)="deleteReader()" class="btn btn-red btn-animation-1">Klik for at fjerne denne måler</a>
+  </div>
+</div>

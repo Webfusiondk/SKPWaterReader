@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="form-group col">
+    <h1>Opdater en måler</h1>
+    <label for="readernumber">Skriv måler nummer her:</label>
+    <input type="text" #readerNumber class="form-control" placeholder="Søgefelt" />
+    <button (click)="searchForReader(readerNumber.value)">Søg</button>
+    <a routerLink="/admin" class="btn btn-link">Annuller</a>
+    <br />
+    <br />
+    <div *ngIf="readerFound; else elseBlock">
+      <app-edit-reader [reader]="reader"></app-edit-reader>
+    </div>
+    <ng-template #elseBlock>Ingen måler fundet</ng-template>
+  </div>
+</div>

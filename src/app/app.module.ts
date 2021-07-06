@@ -30,6 +30,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminComponent } from '../app/admin/admin.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AdminControllerComponent } from './admin-controller/admin-controller.component';
+import { AdminDeleteComponentComponent } from './admin/admin-delete-component/admin-delete-component.component';
+import { AdminEditComponentComponent } from './admin/admin-edit-component/admin-edit-component.component';
+import { DeleteReaderComponent } from './admin/admin-delete-component/delete-reader/delete-reader.component';
+import { EditReaderComponent } from './admin/admin-edit-component/edit-reader/edit-reader.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +50,12 @@ import { MatNativeDateModule } from '@angular/material/core';
     HomeComponent,
     AlertComponent,
     HistoryComponent,
-    AdminComponent
+    AdminComponent,
+    AdminControllerComponent,
+    AdminDeleteComponentComponent,
+    AdminEditComponentComponent,
+    DeleteReaderComponent,
+    EditReaderComponent
   ],
   imports: [
     BrowserModule,

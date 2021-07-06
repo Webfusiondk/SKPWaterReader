@@ -7,41 +7,37 @@ import { AccountService } from '../services/account.service';
 
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
-    users = null;
+  users = null;
 
-    constructor(private apifetch : ApiFetcherService, private router : Router) {}
+  constructor(private apifetch: ApiFetcherService, private router: Router) { }
 
-    ngOnInit() {
-        if (this.apifetch.GetToken.Rolle>1)
-        {
-            this.apifetch.GetAllUsers()
-                .pipe(first())
-                .subscribe(users => this.users = users);
+  ngOnInit() {
+
+    this.apifetch.GetAllUsers()
+      .pipe(first())
+      .subscribe(users => this.users = users);
+
+  }
+
+  deleteUser(id: number) {
+    let temp;
+    this.apifetch.UpdateSession()
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          console.log("Nothing wrong");
+          temp = true;
+          const user = this.users.find(x => x.id === id);
+          user.isDeleting = true;
+          console.log(id);
+          this.apifetch.RemoveUserById(id)
+            .pipe(first())
+            .subscribe(() => this.users = this.users.filter(x => x.id !== id));
+        },
+        error: error => {
+          console.log("Dose not work");
+          temp = false;
         }
-        else{
-            this.router.navigateByUrl('');
-        }
-    }
-
-    deleteUser(id: number) {
-        let temp;
-        this.apifetch.UpdateSession()            
-        .pipe(first())
-        .subscribe({
-            next: () => {
-                console.log("Nothing wrong");
-                temp = true;
-                const user = this.users.find(x => x.id === id);
-                user.isDeleting = true;
-                console.log(id);
-                this.apifetch.RemoveUserById(id)
-                .pipe(first())
-                .subscribe(() => this.users = this.users.filter(x => x.id !== id));
-            },
-            error: error => {
-                console.log("Dose not work");
-                temp = false;
-            }
-        });
-    }
+      });
+  }
 }

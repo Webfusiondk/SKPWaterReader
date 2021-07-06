@@ -32,9 +32,10 @@ export class ApiFetcherService {
   Register(user : User){
     return this.http.post('https://localhost:44397/api/user/createuser',user);
   }
-  Login(username,password){
+  Login(username, password) {
     return this.http.post<token>('https://localhost:44397/api/user/login', { username, password })
-    .pipe(map(data =>{
+      .pipe(map(data => {
+        console.log("yo");
         this.tokenHolder = <token>data;
         console.log(data);
         localStorage.setItem('token', JSON.stringify(this.tokenHolder));
@@ -90,9 +91,5 @@ export class ApiFetcherService {
       })
     )
   }
-  
-  CreateReader(obj : any){
-    console.log(obj);
-    return this.http.post('https://localhost:44397/api/user/createuser',obj);
-  }
+
 }
