@@ -59,7 +59,7 @@ export class StatisticControllerComponent implements OnInit {
   }
   constructor(private readerApi: ApiService) { }
   public readers: any;
-  public selectedReader: any;ng s
+  public selectedReader: any;
   public locations: any;
   ngOnInit(): void {
     this.loadDataFromApi();
