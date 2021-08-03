@@ -37,7 +37,7 @@ export class ApiService {
     return this.http.put(this.readerUrl, reader, httpOptions);
   }
   updateReaderReading(readerDTO: ReaderUpdateDTO): Observable<any> {
-    return this.http.put(this.readerUrl + "/reading", readerDTO, httpOptions);
+    return this.http.put(this.readerUrl + "reading", readerDTO, httpOptions);
   }
   createReader(reader: Reader): Observable<any> {
     return this.http.post(this.readerUrl, reader, httpOptions);
