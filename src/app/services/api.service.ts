@@ -5,6 +5,7 @@ import { Reader } from '../Reader';
 import { ReaderUpdateDTO } from '../ReaderDTO';
 import { LocationObj } from '../Location';
 import { catchError, retry } from 'rxjs/operators';
+import { ReaderWithDate } from '../models/ReaderWithDate';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -50,5 +51,8 @@ export class ApiService {
   }
   getReaderHistory(reader: Reader): Observable<any> {
     return this.http.get<Reader[]>(this.readerHistoryUrl + reader.readerNumber)
+  }
+  getReaderHistoryByDate(readerWithDate: ReaderWithDate): Observable<any> {
+    return this.http.get<Reader[]>(this.readerHistoryUrl + readerWithDate.reader.readerNumber + "/" + readerWithDate.startDate + "/" + readerWithDate.endDate);
   }
 }

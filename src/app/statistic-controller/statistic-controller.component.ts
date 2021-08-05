@@ -9,6 +9,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import * as _moment from 'moment';
 //tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment, Moment } from 'moment';
+import { ReaderWithDate } from '../models/ReaderWithDate';
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
   parse: {
@@ -39,33 +40,61 @@ export const MY_FORMATS = {
   ],
 })
 export class StatisticControllerComponent implements OnInit {
-  date = new FormControl(moment());
+  //startDate = new FormControl(moment());
+  //endDate = new FormControl(moment());
   range = new FormGroup({
-    start: this.date,
-    end: this.date
+    start: new FormControl(moment().startOf('year')),
+    end: new FormControl(moment())
   });
 
-  chosenYearHandler(normalizedYear: Moment) {
-    const ctrlValue = this.date.value;
+  chosenStartYearHandler(normalizedYear: Moment) {
+    const ctrlValue = this.range.controls.start.value
     ctrlValue.year(normalizedYear.year());
-    this.date.setValue(ctrlValue);
+    this.range.controls.start.setValue(ctrlValue);
   }
 
-  chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<Moment>) {
-    const ctrlValue = this.date.value;
+  chosenStartMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<Moment>) {
+    const ctrlValue = this.range.controls.start.value;
     ctrlValue.month(normalizedMonth.month());
-    this.date.setValue(ctrlValue);
+    this.range.controls.start.setValue(ctrlValue);
     datepicker.close();
+    if (this.dateCompare()) {
+      this.selectedReader = new ReaderWithDate(this.selectedReader.reader, this.range.controls.start.value.startOf('month').format("yyyy-MM-DD"), this.range.controls.end.value.endOf('month').format("yyyy-MM-DD"));
+    }
+  }
+  chosenEndYearHandler(normalizedYear: Moment) {
+    const ctrlValue = this.range.controls.end.value;
+    ctrlValue.year(normalizedYear.year());
+    this.range.controls.end.setValue(ctrlValue);
+  }
+
+  chosenEndMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<Moment>) {
+    const ctrlValue = this.range.controls.end.value;
+    ctrlValue.month(normalizedMonth.month());
+    this.range.controls.end.setValue(ctrlValue);
+    datepicker.close();
+    if (this.dateCompare()) {
+      this.selectedReader = new ReaderWithDate(this.selectedReader.reader, this.range.controls.start.value.startOf('month').format("yyyy-MM-DD"), this.range.controls.end.value.endOf('month').format("yyyy-MM-DD"));
+    }
+  }
+  dateCompare(): boolean {
+    if (this.range.controls.end.value > this.range.controls.start.value) {
+
+      return true;
+    }
+    else {
+      return false;
+    }
   }
   constructor(private readerApi: ApiService) { }
   public readers: any;
-  public selectedReader: any;
+  public selectedReader: ReaderWithDate;
   public locations: any;
   ngOnInit(): void {
     this.loadDataFromApi();
   }
 
- 
+
 
   onSelectChange(reader: any) {
     let t: BetterReader;
@@ -74,15 +103,15 @@ export class StatisticControllerComponent implements OnInit {
         t = this.readers[i];
       }
     }
-    this.selectedReader = t;
+    this.selectedReader = new ReaderWithDate(t, this.selectedReader.startDate, this.selectedReader.endDate);
   }
   async loadDataFromApi() {
     await this.readerApi.getReaders().toPromise().then(req => this.readers = req);
-    this.selectedReader = this.readers[0];
+    this.selectedReader = new ReaderWithDate(this.readers[0], moment().startOf('year').format("yyyy-MM-DD"), moment().format("yyyy-MM-DD"));
     this.readerApi.getLocation().subscribe(loc => this.locations = loc);
   }
 }
- 
+
 
 
 

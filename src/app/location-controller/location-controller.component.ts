@@ -21,7 +21,6 @@ export class LocationControllerComponent implements OnInit {
       this.locationApi.getLocation().subscribe(req => this.locations = req);
     }
     else{
-      console.log(this.token.Region);
       this.router.navigateByUrl('/readers', { state: this.token});
     }
   }

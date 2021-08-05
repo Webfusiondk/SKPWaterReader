@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BetterReader } from '../BetterReader';
+import { ReaderWithDate } from '../models/ReaderWithDate'
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./clicked-stats.component.css']
 })
 export class ClickedStatsComponent implements OnInit {
-  @Input() reader: BetterReader;
+  @Input() readerWithDate: ReaderWithDate;
   readerHistory: any;
   readerChartOptions: any;
   constructor(private apiService: ApiService) { }
@@ -19,20 +19,20 @@ export class ClickedStatsComponent implements OnInit {
     this.getReaderHistory();
   }
   async getReaderHistory() {
-    await this.apiService.getReaderHistory(this.reader).toPromise().then(res => this.readerHistory = res);
-    this.readerHistory.push(this.reader);
+    await this.apiService.getReaderHistoryByDate(this.readerWithDate).toPromise().then(res => this.readerHistory = res);
     this.sortDates();
     this.setOptionsForGraph();
   }
   sortDates() {
     this.readerHistory.sort((a, b) => { return <any>(new Date(a.date)) - <any>(new Date(b.date)) });
+    console.log(this.readerHistory);
   }
   setOptionsForGraph() {
     let t: string;
-    t = this.reader.readerUnit;
+    t = this.readerWithDate.reader.readerUnit;
     this.readerChartOptions = {
       title: {
-        text: 'Måler forbrug i år: ' + this.reader.readerName,
+        text: 'Måler forbrug for måler: ' + this.readerWithDate.reader.readerName + " i tidsperioden: " + this.readerWithDate.startDate + " - " + this.readerWithDate.endDate,
       },
       legend: {
       },
@@ -59,6 +59,7 @@ export class ClickedStatsComponent implements OnInit {
       series: [{
         type: 'line',
         data: this.readerHistory.map(r => r.reading),
+        symbolSize: 10,
         areaStyle: {}
       },
       ]
