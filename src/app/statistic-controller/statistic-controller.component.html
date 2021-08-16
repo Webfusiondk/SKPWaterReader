@@ -1,9 +1,36 @@
 <br />
 <select class="select-css" #mySelect (change)="onSelectChange(mySelect.value)">
-  <option *ngFor="let reader of readers" value="{{reader.readerNumber}}">{{reader.readerName}}</option>
+  <optgroup *ngFor="let loc of locations" label="{{loc.locationName}}">
+    <option *ngFor="let reader of readers | filterPipe: loc.locationName: 'location' " value="{{reader.readerNumber}}">{{reader.readerName}}</option>
+  </optgroup>
 </select>
 <br>
-
-<app-clicked-stats [reader]="selectedReader">
+<mat-form-field appearance="fill">
+  <mat-label>Vælg start dato</mat-label>
+  <input matInput [matDatepicker]="dpStart" [formControl]="range.controls.start">
+  <mat-datepicker-toggle matSuffix [for]="dpStart"></mat-datepicker-toggle>
+  <mat-datepicker #dpStart
+                  startView="multi-year"
+                  (yearSelected)="chosenStartYearHandler($event)"
+                  (monthSelected)="chosenStartMonthHandler($event, dpStart)"
+                  panelClass="example-month-picker">
+  </mat-datepicker>
+  <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Ugyldig start dato</mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Vælg slut dato</mat-label>
+  <input matInput [matDatepicker]="dpEnd" [formControl]="range.controls.end">
+  <mat-datepicker-toggle matSuffix [for]="dpEnd"></mat-datepicker-toggle>
+  <mat-datepicker #dpEnd
+                  startView="multi-year"
+                  (yearSelected)="chosenEndYearHandler($event)"
+                  (monthSelected)="chosenEndMonthHandler($event, dpEnd)"
+                  panelClass="example-month-picker">
+  </mat-datepicker>
+  <mat-error *ngIf="range.controls.end.hasError('matStartDateInvalid')">Ugyldig slut dato</mat-error>
+</mat-form-field>
+<app-clicked-stats [readerWithDate]="selectedReader">
 
 </app-clicked-stats>
+
+

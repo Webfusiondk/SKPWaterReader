@@ -20,8 +20,12 @@
             </div>
             <div class="form-row">
                 <div class="form-group col">
-                    <label for="readerUnit">Måler Unit</label>
-                    <input type="text" formControlName="readerUnit" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.readerUnit.errors }" />
+                    <label for="readerUnit">Måler Enhed</label>
+                    <select type="text" formControlName="readerUnit" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.readerUnit.errors }">
+                      <option value="m3">m3</option>
+                      <option value="kwh">kwh</option>
+                      <option value="mwh">mwh</option>
+                    </select>
                     <div *ngIf="submitted && f.readerUnit.errors" class="invalid-feedback">
                         <div *ngIf="f.readerUnit.errors.required">Måler Unit er nødvendigt</div>
                     </div>
@@ -35,40 +39,41 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col">
-                    <label for="readerRegion">Region</label>
-                    <select type="text" formControlName="readerRegion" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.readerRegion.errors }" >
-                        <option value="Roskilde">Roskilde</option>
-                        <option value="Ringsted">Ringsted</option>
-                        <option value="Næstved">Næstved</option>
-                        <option value="Vordingborg">Vordingborg</option>
-                    </select>
-                    <div *ngIf="submitted && f.readerRegion.errors" class="invalid-feedback">
-                        <div *ngIf="f.readerRegion.errors.required">Vælg en region</div>
-                    </div>
+              <div *ngIf="token.Rolle > 2;else other_content" class="form-group col">
+                <label for="region">Lokation</label>
+                <select type="text" formControlName="region" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.region.errors }">
+                  <option value="Roskilde">Roskilde</option>
+                  <option value="Ringsted">Ringsted</option>
+                  <option value="Næstved">Næstved</option>
+                  <option value="Vordingborg">Vordingborg</option>
+                </select>
+                <div *ngIf="submitted && f.region.errors" class="invalid-feedback">
+                  <div *ngIf="f.region.errors.required">Vælg en lokation</div>
                 </div>
+              </div>
+              <ng-template #other_content>
                 <div class="form-group col">
-                    <label for="readerplacement">Placering</label>
-                    <input type="text" formControlName="readerplacement" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.readerplacement.errors }" />
-                    <div *ngIf="submitted && f.readerplacement.errors" class="invalid-feedback">
-                        <div *ngIf="f.readerplacement.errors.required">Placering er nødvendigt</div>
-                    </div>
+                  <label for="region">Lokation</label>
+                  <input type="text" formControlName="region" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.region.errors }" readonly>
+                  <div *ngIf="submitted && f.region.errors" class="invalid-feedback">
+                    <div *ngIf="f.region.errors.required">Vælg en lokation</div>
+                  </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <mat-form-field appearance="fill">
-                    <mat-label>Vælg en dato</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="readerdate">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
+              </ng-template>
+              <div class="form-group col">
+                <label for="readerplacement">Placering</label>
+                <input type="text" formControlName="placement" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.placement.errors }" />
+                <div *ngIf="submitted && f.placement.errors" class="invalid-feedback">
+                  <div *ngIf="f.placement.errors.required">Placering er nødvendigt</div>
+                </div>
+              </div>
             </div>
                 <div class="form-group">
                     <button [disabled]="loading" class="btn btn-primary">
                         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                         Tilføj måler
                     </button>
-                    <a routerLink="" class="btn btn-link">Annuller</a>
+                    <a routerLink="/admin" class="btn btn-link">Annuller</a>
                 </div>
         </form>  
     </div>

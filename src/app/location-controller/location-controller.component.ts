@@ -17,13 +17,10 @@ export class LocationControllerComponent implements OnInit {
 
   ngOnInit(): void {
     this.SetToken();
-    console.log(this.token.Region);
-    console.log()
-    if(this.token.Rolle >1){
+    if(this.token.Rolle >2){
       this.locationApi.getLocation().subscribe(req => this.locations = req);
     }
     else{
-      console.log(this.token.Region);
       this.router.navigateByUrl('/readers', { state: this.token});
     }
   }

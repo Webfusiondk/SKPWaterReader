@@ -1,0 +1,75 @@
+<div class="p-4">
+  <div class="container">
+    <h1>Opdater måler</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="readername">Måler Navn</label>
+          <input type="text" formControlName="readername" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.readername.errors }" />
+          <div *ngIf="submitted && f.readername.errors" class="invalid-feedback">
+            <div *ngIf="f.readername.errors.required">Måler Navn er nødvendigt</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="readerUnit">Måler Enhed</label>
+          <select type="text" formControlName="readerUnit" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.readerUnit.errors }">
+            <option value="m3">m3</option>
+            <option value="kwh">kwh</option>
+            <option value="mwh">mwh</option>
+          </select>
+          <div *ngIf="submitted && f.readerUnit.errors" class="invalid-feedback">
+            <div *ngIf="f.readerUnit.errors.required">Måler Unit er nødvendigt</div>
+          </div>
+        </div>
+        <div class="form-group col">
+          <label for="reading">Første måling</label>
+          <input type="text" formControlName="reading" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.reading.errors }" />
+          <div *ngIf="submitted && f.reading.errors" class="invalid-feedback">
+            <div *ngIf="f.reading.errors.required">Måler Nummer er nødvendigt</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="readerRegion">Lokation</label>
+          <select type="text" formControlName="location" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.location.errors }">
+            <option value="Roskilde">Roskilde</option>
+            <option value="Ringsted">Ringsted</option>
+            <option value="Næstved">Næstved</option>
+            <option value="Vordingborg">Vordingborg</option>
+          </select>
+          <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+            <div *ngIf="f.location.errors.required">Vælg en lokation</div>
+          </div>
+        </div>
+        <div class="form-group col">
+          <label for="readerplacement">Placering</label>
+          <input type="text" formControlName="placement" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.placement.errors }" />
+          <div *ngIf="submitted && f.placement.errors" class="invalid-feedback">
+            <div *ngIf="f.placement.errors.required">Placering er nødvendigt</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Opdater Måler
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<br />
+
+<h1>Information om måler:</h1>
+<div class="rectangle">
+  <div class="center">
+    <p class="readerId">Måler navn: {{reader.readerName}}</p><br />
+    <p class="readerId">Måler nummer: {{reader.readerNumber}}</p><br />
+    <p class="readerId">Sidste aflæsning: {{reader.reading}} {{reader.readerUnit}}</p><br />
+    <p class="readerId">Dato for sidste aflæsning: {{reader.date}}</p><br />
+    <p class="readerId">Placering: {{reader.placement}}</p><br />
+  </div>
+</div>

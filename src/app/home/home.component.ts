@@ -23,14 +23,12 @@ export class HomeComponent {
 
     private fetchData(){
         const promise = this.ApiFetcherService.GetUserById(this.token.Id);
-        console.log(promise);
 
         promise.then( (data) => {
           var json = JSON.stringify(data); 
           
           var obj = JSON.parse(json);
 
-          console.log(obj.FirstName);
           this.user.firstName = obj.FirstName;
         })
     }
