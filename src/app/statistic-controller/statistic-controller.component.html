@@ -1,6 +1,8 @@
 <br />
 <select class="select-css" #mySelect (change)="onSelectChange(mySelect.value)">
-  <option *ngFor="let reader of readers" value="{{reader.readerNumber}}">{{reader.readerName}}</option>
+  <optgroup *ngFor="let loc of locations" label="{{loc.locationName}}">
+    <option *ngFor="let reader of readers | filterPipe: loc.locationName: 'location' " value="{{reader.readerNumber}}">{{reader.readerName}}</option>
+  </optgroup>
 </select>
 <br>
 <mat-form-field appearance="fill">

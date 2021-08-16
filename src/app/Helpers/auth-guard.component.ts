@@ -16,13 +16,11 @@ canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     this.apiFetcher.UpdateSession().subscribe();
     if (token) {
         // authorised so return true
-        console.log("Auth guard true");
         return true;
     }
 
     // not logged in so redirect to login page with the return url
     this.router.navigate(['/account/login'], { queryParams: { returnUrl: state.url }});
-    console.log("Auth guard false")
     return false;
 }
 }

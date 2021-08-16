@@ -35,13 +35,9 @@ export class ApiFetcherService {
   Login(username, password) {
     return this.http.post<token>('https://localhost:44397/api/user/login', { username, password })
       .pipe(map(data => {
-        console.log("yo");
         this.tokenHolder = <token>data;
-        console.log(data);
         localStorage.setItem('token', JSON.stringify(this.tokenHolder));
-        console.log("After localstorage");
         this.tokenSubject.next(data);
-        console.log("Token " + this.tokenHolder.Id + this.tokenHolder.Token);
         return this.tokenHolder;
     }));
 
@@ -56,7 +52,6 @@ export class ApiFetcherService {
     }
 
     RemoveUserById(id : number){
-      console.log(id);
       return this.http.get<User[]>(`https://localhost:44397/api/user/remove` +id)
       .pipe(map(x => {
         // auto logout if the logged in user deleted their own record
@@ -78,15 +73,12 @@ export class ApiFetcherService {
     let tempuser : User;
     tempuser = paramas;
     tempuser.id = id;
-    console.log(tempuser);
     return this.http.post('https://localhost:44397/api/user/updateuser', tempuser)
   }
 
   UpdateSession(){
     return this.http.post('https://localhost:44397/api/user/validateuser', this.tokenSubject.value) 
     .pipe(catchError((err)=> {
-        console.log('Error cought');
-        console.error(err);
         return throwError(err);
       })
     )

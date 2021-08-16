@@ -10,6 +10,7 @@ import * as _moment from 'moment';
 //tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment, Moment } from 'moment';
 import { ReaderWithDate } from '../models/ReaderWithDate';
+import { token } from '../models/token';
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
   parse: {
@@ -46,7 +47,7 @@ export class StatisticControllerComponent implements OnInit {
     start: new FormControl(moment().startOf('year')),
     end: new FormControl(moment())
   });
-
+  token: token;
   chosenStartYearHandler(normalizedYear: Moment) {
     const ctrlValue = this.range.controls.start.value
     ctrlValue.year(normalizedYear.year());
@@ -91,10 +92,13 @@ export class StatisticControllerComponent implements OnInit {
   public selectedReader: ReaderWithDate;
   public locations: any;
   ngOnInit(): void {
+    this.SetToken();
     this.loadDataFromApi();
   }
 
-
+  SetToken() {
+    this.token = JSON.parse(localStorage.getItem('token'));
+  }
 
   onSelectChange(reader: any) {
     let t: BetterReader;
@@ -108,7 +112,14 @@ export class StatisticControllerComponent implements OnInit {
   async loadDataFromApi() {
     await this.readerApi.getReaders().toPromise().then(req => this.readers = req);
     this.selectedReader = new ReaderWithDate(this.readers[0], moment().startOf('year').format("yyyy-MM-DD"), moment().format("yyyy-MM-DD"));
-    this.readerApi.getLocation().subscribe(loc => this.locations = loc);
+    await this.readerApi.getLocation().toPromise().then(loc => this.locations = loc);
+    if (this.token.Rolle < 3) {
+      for (var i = this.locations.length - 1; i >= 0; i--) {
+        if (this.locations[i].locationName != this.token.Region) {
+          this.locations.splice(i, 1);
+        }
+      }
+    }
   }
 }
 

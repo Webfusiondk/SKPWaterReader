@@ -39,26 +39,34 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col">
-                    <label for="readerRegion">Region</label>
-                    <select type="text" formControlName="location" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.location.errors }" >
-                        <option value="Roskilde">Roskilde</option>
-                        <option value="Ringsted">Ringsted</option>
-                        <option value="Næstved">Næstved</option>
-                        <option value="Vordingborg">Vordingborg</option>
-                        <option value="Holbæk">Holbæk</option>
-                    </select>
-                    <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
-                        <div *ngIf="f.location.errors.required">Vælg en region</div>
-                    </div>
+              <div *ngIf="token.Rolle > 2;else other_content" class="form-group col">
+                <label for="region">Lokation</label>
+                <select type="text" formControlName="region" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.region.errors }">
+                  <option value="Roskilde">Roskilde</option>
+                  <option value="Ringsted">Ringsted</option>
+                  <option value="Næstved">Næstved</option>
+                  <option value="Vordingborg">Vordingborg</option>
+                </select>
+                <div *ngIf="submitted && f.region.errors" class="invalid-feedback">
+                  <div *ngIf="f.region.errors.required">Vælg en lokation</div>
                 </div>
+              </div>
+              <ng-template #other_content>
                 <div class="form-group col">
-                    <label for="readerplacement">Placering</label>
-                    <input type="text" formControlName="placement" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.placement.errors }" />
-                    <div *ngIf="submitted && f.placement.errors" class="invalid-feedback">
-                        <div *ngIf="f.placement.errors.required">Placering er nødvendigt</div>
-                    </div>
+                  <label for="region">Lokation</label>
+                  <input type="text" formControlName="region" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.region.errors }" readonly>
+                  <div *ngIf="submitted && f.region.errors" class="invalid-feedback">
+                    <div *ngIf="f.region.errors.required">Vælg en lokation</div>
+                  </div>
                 </div>
+              </ng-template>
+              <div class="form-group col">
+                <label for="readerplacement">Placering</label>
+                <input type="text" formControlName="placement" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.placement.errors }" />
+                <div *ngIf="submitted && f.placement.errors" class="invalid-feedback">
+                  <div *ngIf="f.placement.errors.required">Placering er nødvendigt</div>
+                </div>
+              </div>
             </div>
                 <div class="form-group">
                     <button [disabled]="loading" class="btn btn-primary">
