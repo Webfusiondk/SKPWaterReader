@@ -28,10 +28,6 @@ export class ClickedStatsComponent implements OnInit {
     this.setOptionsForGraph();
   }
   sortDates() {
-    if (this.readerWithDate.endDate > this.readerWithDate.reader.date) {
-      let tempReader: string = JSON.stringify(this.readerWithDate.reader);
-      this.readerHistory.push(JSON.parse(tempReader));
-    }
     this.readerHistory.sort((a, b) => { return <any>(new Date(a.date)) - <any>(new Date(b.date)) });
   }
   sortReadings() {
