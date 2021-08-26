@@ -34,7 +34,7 @@ export class EditReaderComponent implements OnInit {
   form = this.formBuilder.group({
     readername: ['', Validators.required],
     readerUnit: ['', Validators.required],
-    reading: ['', Validators.required],
+    reading: ['0', Validators.required],
     placement: ['', Validators.required],
     location: ['', Validators.required]
   });

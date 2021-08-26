@@ -33,22 +33,21 @@ export class AdminComponent implements OnInit {
       readername: ['', Validators.required],
       readernumber: ['', Validators.required],
       readerUnit: ['', Validators.required],
-      reading: ['', Validators.required],
+      reading: ['0', Validators.required],
       placement: ['', Validators.required],
-      region: [this.token.Region, Validators.required]
+      location: [this.token.Region, Validators.required]
     });
   }
 
   onSubmit() {
-    console.log("Clicked");
     this.submitted = true;
 
     // reset alerts on submit
     this.alertService.clear();
+    this.alertService.clear();
     console.log(this.form);
     // stop here if form is invalid
     if (this.form.invalid) {
-      console.log("Failed");
       return;
     }
 
