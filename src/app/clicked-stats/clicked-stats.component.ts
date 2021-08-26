@@ -23,12 +23,15 @@ export class ClickedStatsComponent implements OnInit {
   }
   async getReaderHistory() {
     await this.apiService.getReaderHistoryByDate(this.readerWithDate).toPromise().then(res => this.readerHistory = res);
-    this.readerHistory.push(this.readerWithDate.reader);
     this.sortDates();
     this.sortReadings();
     this.setOptionsForGraph();
   }
   sortDates() {
+    if (this.readerWithDate.endDate > this.readerWithDate.reader.date) {
+      let tempReader: string = JSON.stringify(this.readerWithDate.reader);
+      this.readerHistory.push(JSON.parse(tempReader));
+    }
     this.readerHistory.sort((a, b) => { return <any>(new Date(a.date)) - <any>(new Date(b.date)) });
   }
   sortReadings() {
@@ -49,8 +52,8 @@ export class ClickedStatsComponent implements OnInit {
         let tempNum: number = closest + (this.readerHistory[i].reading * 1);
         let saveReading: number = this.readerHistory[i].reading;
         this.readerHistory[i].reading = tempNum;
-        let tempUser: string = JSON.stringify(this.readerHistory[i]);
-        this.readerHistorySorted.push(JSON.parse(tempUser));
+        let tempReader: string = JSON.stringify(this.readerHistory[i]);
+        this.readerHistorySorted.push(JSON.parse(tempReader));
         this.readerHistory[i].reading = saveReading;
         }
     }
@@ -64,7 +67,6 @@ export class ClickedStatsComponent implements OnInit {
         }
       }
     }
-    this.readerHistorySorted.push(this.readerHistory[0]);
     this.readerHistorySorted.sort((a, b) => { return <any>(new Date(a.date)) - <any>(new Date(b.date)) });
   }
   setOptionsForGraph() {
