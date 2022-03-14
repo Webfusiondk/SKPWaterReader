@@ -30,10 +30,10 @@ export class ApiFetcherService {
   }
 
   Register(user : User){
-    return this.http.post('https://localhost:44397/api/user/createuser',user);
+    return this.http.post('http://192.168.159.128:8080/api/user/createuser',user);
   }
   Login(username, password) {
-    return this.http.post<token>('https://localhost:44397/api/user/login', { username, password })
+    return this.http.post<token>('http://192.168.159.128:8080/api/user/login', { username, password })
       .pipe(map(data => {
         this.tokenHolder = <token>data;
         localStorage.setItem('token', JSON.stringify(this.tokenHolder));
@@ -44,15 +44,15 @@ export class ApiFetcherService {
     }
     GetUserById(id: number){
       
-      return this.http.get<betterUser>('https://localhost:44397/api/user/getuser' +id).toPromise();
+      return this.http.get<betterUser>('http://192.168.159.128:8080/api/user/getuser' +id).toPromise();
     }
 
     GetAllUsers(){
-      return this.http.get<User[]>(`https://localhost:44397/api/user/getallusers`);
+      return this.http.get<User[]>(`http://192.168.159.128:8080/api/user/getallusers`);
     }
 
     RemoveUserById(id : number){
-      return this.http.get<User[]>(`https://localhost:44397/api/user/remove` +id)
+      return this.http.get<User[]>(`http://192.168.159.128:8080/api/user/remove` +id)
       .pipe(map(x => {
         // auto logout if the logged in user deleted their own record
         if (id == this.GetToken.Id) {
@@ -73,11 +73,11 @@ export class ApiFetcherService {
     let tempuser : User;
     tempuser = paramas;
     tempuser.id = id;
-    return this.http.post('https://localhost:44397/api/user/updateuser', tempuser)
+    return this.http.post('http://192.168.159.128:8080/api/user/updateuser', tempuser)
   }
 
   UpdateSession(){
-    return this.http.post('https://localhost:44397/api/user/validateuser', this.tokenSubject.value) 
+    return this.http.post('http://192.168.159.128:8080/api/user/validateuser', this.tokenSubject.value)
     .pipe(catchError((err)=> {
         return throwError(err);
       })

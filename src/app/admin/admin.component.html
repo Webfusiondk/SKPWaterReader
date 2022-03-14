@@ -31,7 +31,10 @@
                     </div>
                 </div>
                 <div class="form-group col">
-                    <label for="reading">Første måling</label>
+                  <label for="reading">
+                    Første måling
+                    <em >(Sæt til 0 hvis det er en måler uden nogle målinger endnu, ellers skal den sættes til dens sidste eller nuværende måling)</em>
+                  </label>
                     <input type="text" formControlName="reading" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.reading.errors }" />
                     <div *ngIf="submitted && f.reading.errors" class="invalid-feedback">
                         <div *ngIf="f.reading.errors.required">Måler Nummer er nødvendigt</div>

@@ -17,9 +17,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ApiService {
-  private readerUrl = 'https://localhost:44397/api/Reader/';
-  private readerHistoryUrl = 'https://localhost:44397/api/Reader/history/'
-  private locationUrl = 'https://localhost:44397/api/Location';
+  private readerUrl = 'http://192.168.159.128:8080/api/Reader/';
+  private readerHistoryUrl = 'http://192.168.159.128:8080/api/Reader/history/';
+  private locationUrl = 'http://192.168.159.128:8080/api/Location';
   constructor(private http: HttpClient) {
   }
   getReaders(): Observable<Reader[]> {
